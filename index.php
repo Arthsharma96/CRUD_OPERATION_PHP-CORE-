@@ -31,6 +31,7 @@ $result = $conn->query($sql);
                     <th>College</th>
                     <th>Department</th>
                     <th>Course</th>
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -48,11 +49,19 @@ $result = $conn->query($sql);
                         <td><?php echo $row['department']; ?></td>
                         <td><?php echo $row['course']; ?></td>
                         <td>
-    <div class="btn-group btn-group-sm" role="group" aria-label="User Actions">
-        <a href="update.php?id=<?php echo $row['id']; ?>" class="btn btn-success">Edit</a>
-        <a href="delete.php?id=<?php echo $row['id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
-    </div>
-</td>
+                        <?php if ($row['status']): ?>
+                            <span class="badge badge-success py-2">Active</span>
+                        <?php else: ?>
+                            <span class="badge badge-secondary py-2">Inactive</span>
+                        <?php endif; ?>
+                        </td>
+
+                        <td>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="User Actions">
+                            <a href="update.php?id=<?php echo $row['id']; ?>" class="btn btn-success">Edit</a>
+                            <a href="delete.php?id=<?php echo $row['id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
+                        </div>
+                    </td>
                     </tr>
                 <?php endwhile; ?>
             </tbody>
